@@ -7,10 +7,15 @@ import { setContext } from '@apollo/client/link/context';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-
-import Login from './pages/Login';
 import NoMatch from './components/NoMatch';
+import Stall from './components/Stall';
+
+import Cart from './pages/Cart';
+import Dashboard from './pages/Dashboard';
+import Login from './pages/Login';
+import MyStall from './pages/MyStall';
 import Signup from './pages/Signup';
+import ViewOneStall from './pages/ViewOneStall';
 
 
 const httpLink = createHttpLink({
@@ -41,8 +46,13 @@ function App() {
         <Header />
         <div className="container">
           <Switch>
-            <Route exact path="/login" component={Login} />
+            <Route exact path="/mycart" component={Cart} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/profile/:username?" component={MyStall} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/dashboard/:id" component={ViewOneStall} />
+            <Route exact path="/stall" component={Stall} />
 
             <Route component={NoMatch} />
           </Switch>

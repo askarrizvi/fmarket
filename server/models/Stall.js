@@ -21,7 +21,8 @@ const upvoteSchema = new Schema(
     {
         userId: {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'User',
+            unique: true
         }
     }
 )
@@ -32,6 +33,10 @@ const stallSchema = new Schema(
             type: String,
             required: true
         },
+        username: {
+            type: String,
+            required: true
+          },
         upvotes: [upvoteSchema],
         inventory: [inventorySchema]
     },
@@ -48,4 +53,6 @@ stallSchema.virtual('upvoteCount').get(function(){
 });
 
 const Stall = model('Stall', stallSchema);
-module.exports = Stall;
+const Inventory = model('Inventory', inventorySchema);
+const Upvote = model('Upvote', upvoteSchema);
+module.exports = {Stall, Inventory, Upvote};

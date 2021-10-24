@@ -29,6 +29,10 @@ const cartItemSchema = new Schema(
 
 const cartSchema = new Schema(
     {
+        username: {
+            type: String,
+            required: true
+        },
         cartItems: [cartItemSchema]
     },
     {
@@ -40,7 +44,7 @@ const cartSchema = new Schema(
     }
 )
 
-cartSchema.virtual('totalPrice').get(function(){
+cartSchema.virtual('totalPrice').get(function () {
     let total = 0;
     this.cartItems.forEach(item => {
         total = total + item.price;
@@ -48,5 +52,6 @@ cartSchema.virtual('totalPrice').get(function(){
     return total;
 });
 
+const CartItem = model('CartItem', cartItemSchema)
 const Cart = model('Cart', cartSchema);
-module.exports = Cart;
+module.exports = { Cart, CartItem };

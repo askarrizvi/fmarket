@@ -1,72 +1,81 @@
-// import the gql tagged template function
 const { gql } = require('apollo-server-express');
 
-// create our typeDefs
 const typeDefs = gql`
-type Auth {
-    token: ID!
-    user: User
-  }
-
-  type User {
-    _id: ID
-    username: String
-    email: String
-    stall: Stall
-    cart: Cart
-  }
-
-  type Stall {
+  type Category {
     _id: ID
     name: String
-    upvotes: [Upvote]
-    inventory: [Inventory]
-  }
-
-  type Upvote {
-    _id: ID
-    userId: [User]
-  }
-
-  type Inventory {
-    _id: ID
-    productId: Product
-    price: Float
-    quantity: Int
   }
 
   type Product {
     _id: ID
     name: String
+    description: String
     image: String
+    quantity: Int
+    price: Float
+    category: Category
   }
 
-  type Cart {
+  type Order {
     _id: ID
-    cartItems: [CartItems]
+    purchaseDate: String
+    products: [Product]
   }
 
-  type CartItems {
-      stallID: Stall
-      productId: Product
-      price: Float
-      quantity: Int
+  type Stall {
+    _id: ID
+    name: String
+    upvotes: Int
+    products: [StallProduct]
+  }
+
+  type StallProduct {
+    _id: ID
+    productId: Product
+    quantity: Int
+    price: Float
+  }
+
+  type User {
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    username: String
+    stall: Stall
+    orders: [Order]
+  }
+
+  type Auth {
+    token: ID
+    user: User
+  }
+
+  type Checkout {
+    session: ID
   }
 
   type Query {
-    me: User
-    users: [User]
-    user(username: String!): User
-    stall(username: String): Stall
-    cart(username: String): Cart
+    categories: [Category]
+    products(category: ID, name: String): [Product]
+    product(_id: ID!): Product
+    user: User
+    stall(_id: ID!): Stall
+    stallProduct(_id: ID!): StallProduct
+    order(_id: ID!): Order
+    checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addStall(name: String!): Stall
+    addOrder(products: [ID]!): Order
+    updateUser(firstName: String, lastName: String, email: String, password: String): User
+    updateProduct(_id: ID!, quantity: Int!): Product
+    updateStall(_id: ID! , products: [ID!]): Stall
+    updateStallProduct(_id: ID!, quantity: Int): StallProduct
     login(email: String!, password: String!): Auth
-    addUser(username: String!, email: String!, password: String!): Auth
-    addToCart()
-    addThought(thoughtText: String!): Thought
-    addReaction(thoughtId: ID!, reactionBody: String!): Thought
-    addFriend(friendId: ID!): User
   }
-`
+`;
+
+module.exports = typeDefs;

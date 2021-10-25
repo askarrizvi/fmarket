@@ -9,12 +9,33 @@ export const QUERY_USERS = gql`
         name
         upvotes
         products {
-          productId {
+          _id
+          details {
+            _id
             name
+            description
+            image
           }
           price
           quantity
         }
+      }
+    }
+  }
+`
+
+export const QUERY_STALL = gql`
+  query stall($_id: ID) {
+    stall(_id: $_id) {
+      _id
+      name
+      upvotes
+      products {
+        productId {
+          name
+        }
+        price
+        quantity
       }
     }
   }

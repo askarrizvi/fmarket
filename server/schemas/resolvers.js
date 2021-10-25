@@ -54,11 +54,6 @@ const resolvers = {
       const user = await User.findById(_id);
       return user;
     },
-    stall: async (parent, { userid }) => {
-      const user = await User.findById(userid)
-      return user.stall;
-      //return await Stall.findById(_id).populate('products');
-    },
     getStallbyId: async (parent, { _id }) => {
       return await Stall.findById(_id);
     },
@@ -67,8 +62,11 @@ const resolvers = {
       console.log(stalls);
       return stalls;
     },
-    stallProduct: async (parent, { _id }) => {
-      return await StallProduct.findById(_id).populate('productId');
+    stall: async (parent, {_id}) => {
+      return await Stall.findById(_id).popuate('products.details')
+    },
+    stallProduct: async (parent, {_id}) => {
+      return await StallProduct.findById(_id).populate('details');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -180,6 +178,9 @@ const resolvers = {
       const decrement = Math.abs(quantity) * -1;
       return await StallProduct.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
+    // updateUpvote : async () => {
+
+    // },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

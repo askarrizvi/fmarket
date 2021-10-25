@@ -41,13 +41,13 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     getUsers: async () => {
-      return await User.find()
+      return await User.find().populate('stall.products.details')
     },
     stall: async (parent, {_id}) => {
-      return await Stall.findById(_id).populate('products');
+      return await Stall.findById(_id).popuate('products.details')
     },
     stallProduct: async (parent, {_id}) => {
-      return await StallProduct.findById(_id).populate('productId');
+      return await StallProduct.findById(_id).populate('details');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -147,6 +147,9 @@ const resolvers = {
       const decrement = Math.abs(quantity) * -1;
       return await StallProduct.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
+    // updateUpvote : async () => {
+
+    // },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
 

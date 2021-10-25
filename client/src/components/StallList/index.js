@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
-import ProductItem from '../ProductItem';
+import StallItem from '../StallItem';
 import { QUERY_USERS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { useStoreContext } from '../../utils/GlobalState';
@@ -12,14 +12,11 @@ import { idbPromise } from '../../utils/helpers';
 
 function ProductList() {
   const [state, dispatch] = useStoreContext();
-  
+
   const { loading, data } = useQuery(QUERY_USERS);
 
-  const stalls = data?.stalls || [];
-
   useEffect(() => {
-    if(data) {
-      console.log(data)
+    if (data) {
       dispatch({
         type: UPDATE_STALLS,
         stalls: data.getUsers.map((user) => {
@@ -27,10 +24,9 @@ function ProductList() {
         })
       })
       data.getUsers.forEach((user) => {
-        console.log(user.stall)
         idbPromise('stalls', 'put', user.stall)
       });
-      
+
     } else if (!loading) {
       idbPromise('stalls', 'get').then((stalls) => {
         dispatch({
@@ -38,23 +34,23 @@ function ProductList() {
           stalls: stalls
         })
       })
-      console.log('NO DATA')
-    }  
+    }
   }, [data, loading])
 
   return (
     <div className="my-2">
       <h2>Farmer's Market Stalls:</h2>
-      {stalls.length ? (
+      {state.stalls.length ? (
         <div className="flex-row">
-            <ProductItem
-              key={stalls._id}
-              _id={stalls._id}
-              image={stalls.image}
-              name={stalls.name}
-              price={stalls.price}
-              quantity={stalls.quantity}
+          {state.stalls.map(stall => (
+            <StallItem
+              key={stall._id}
+              _id={stall._id}
+              name={stall.name}
+              products={stall.products}
+              upvotes={stall.upvotes}
             />
+          ))}
         </div>
       ) : (
         <h3>There aren't any stalls yet!</h3>

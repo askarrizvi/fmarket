@@ -31,7 +31,7 @@ const typeDefs = gql`
 
   type StallProduct {
     _id: ID
-    productId: Product
+    details: Product
     quantity: Int
     price: Float
   }

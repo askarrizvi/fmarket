@@ -129,18 +129,18 @@ db.once('open', async () => {
       name: "Pam's Stall",
       upvotes: 50,
       products: [
-        {productId: products[0]._id, price: 3.99, quantity: 200}, 
-        {productId: products[1]._id, price: 2.99, quantity: 400}, 
-        {productId: products[2]._id, price: 5.99, quantity: 150}]
+        {details: products[0]._id, price: 3.99, quantity: 200}, 
+        {details: products[1]._id, price: 2.99, quantity: 400}, 
+        {details: products[2]._id, price: 5.99, quantity: 150}]
     },
     {
       name: "Elijah's Stall",
       upvotes: 30,
       products: [
-        {productId: products[0]._id, price: 4.99, quantity: 100}, 
-        {productId: products[3]._id, price: 6.99, quantity: 325}, 
-        {productId: products[7]._id, price: 2.99, quantity: 250},
-        {productId: products[8]._id, price: 7.99, quantity: 50}]
+        {details: products[0]._id, price: 4.99, quantity: 100}, 
+        {details: products[3]._id, price: 6.99, quantity: 325}, 
+        {details: products[7]._id, price: 2.99, quantity: 250},
+        {details: products[8]._id, price: 7.99, quantity: 50}]
     }
   ])
 

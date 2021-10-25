@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const stallProductSchema = new Schema({
-  productId: {
+  details: {
     type: Schema.Types.ObjectId,
     ref: 'Product',
     required: true

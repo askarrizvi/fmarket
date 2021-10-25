@@ -3,7 +3,6 @@ const { User, Product, Category, Order, Stall } = require('../models');
 const StallProduct = require('../models/StallProduct');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
-
 const resolvers = {
   Query: {
     categories: async () => {
@@ -42,7 +41,7 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     getUsers: async () => {
-      return await User.find();
+      return await User.find()
     },
     stall: async (parent, {_id}) => {
       return await Stall.findById(_id).populate('products');

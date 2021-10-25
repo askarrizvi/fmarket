@@ -14,15 +14,6 @@ const productSchema = new Schema({
   image: {
     type: String
   },
-  price: {
-    type: Number,
-    min: 0.99
-  },
-  quantity: {
-    type: Number,
-    min: 0,
-    default: 0
-  },
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category',

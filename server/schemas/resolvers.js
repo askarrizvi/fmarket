@@ -29,12 +29,17 @@ const resolvers = {
     },
     user: async (parent, args, context) => {
       if (context.user) {
-        const user = await User.findById(context.user._id).populate({
+        /*const user = await User.findById(context.user._id).populate({
           path: 'orders.products',
           populate: 'category'
         });
 
         user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
+
+        return user;*/
+
+        const user = await User.findById(context.user._id);
+
 
         return user;
       }
@@ -44,8 +49,10 @@ const resolvers = {
     getUsers: async () => {
       return await User.find();
     },
-    stall: async (parent, {_id}) => {
-      return await Stall.findById(_id).populate('products');
+    stall: async (parent, {userid}) => {
+      const user = await User.findById(userid)
+      return user.stall;
+      //return await Stall.findById(_id).populate('products');
     },
     stallProduct: async (parent, {_id}) => {
       return await StallProduct.findById(_id).populate('productId');
@@ -135,11 +142,6 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
-    },
-    updateProduct: async (parent, { _id, quantity }) => {
-      const decrement = Math.abs(quantity) * -1;
-
-      return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
     },
     updateStall: async (parent, {_id, products}) => {
       return await Stall.findByIdAndUpdate(_id, { $inc: { products: products } }, { new: true });

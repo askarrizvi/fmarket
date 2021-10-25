@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { useQuery } from '@apollo/client';
+import React, { useEffect } from 'react';
 
-import { QUERY_PRODUCTS } from '../utils/queries';
-import spinner from '../assets/spinner.gif';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { Link, useParams } from 'react-router-dom';
 import { useStoreContext } from "../utils/GlobalState";
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
-  ADD_TO_CART,
-  UPDATE_PRODUCTS,
+  ADD_TO_CART
 } from '../utils/actions';
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
@@ -57,37 +56,32 @@ function Detail() {
     idbPromise('cart', 'delete', { ...product });
   };
 
-  
-  
   return (
     <>
       {stall ? (
-        <div className="container my-1">
+        <div>
           <Link to="/">← Back to Products</Link>
 
           <h2>{stall.name}</h2>
-          {stall.products.map(product => (
-            <div>
-              <p>
-                <strong>Product Name:</strong>{product.details.name}
-                <strong>Product Description:</strong>{product.details.description}
-                <strong>Quantity: </strong>{product.quantity}
-                <strong>Price:</strong>${product.price}{' '}
-                <button onClick={() => {addToCart(product)}}>Add to cart</button>
-            <button
-              disabled={!state.cart.find(p => p._id === product._id)}
-              onClick={() => {removeFromCart(product)}}
-            > 
-              Remove from Cart
-            </button>
-              </p>
-
-              <img
-            src={`/images/${product.details.image}`}
-            alt={product.details.name}
-          />
-            </div>
-          ))}
+          <Container>
+            <Row>
+              {stall.products.map(product => (
+                <Col xs={12} lg={4} className='text-center'>
+                  <Card style={{ width: '18rem' }}>
+                    <Card.Img variant="top" src={`/images/${product.details.image}`} alt={product.details.name} />
+                    <Card.Body>
+                      <Card.Title>{product.details.name}</Card.Title>
+                      <Card.Text> {product.details.description} </Card.Text>
+                      <Card.Text> Quantity: {product.quantity} </Card.Text>
+                      <Card.Text> Price: {product.price} </Card.Text>
+                      <Button variant="primary" onClick={() => { addToCart(product) }}>Add to cart</Button>
+                      <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Container>
         </div>
 
       ) : null}

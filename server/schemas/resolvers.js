@@ -49,12 +49,12 @@ const resolvers = {
     getUsers: async () => {
       return await User.find();
     },
-    stall: async (parent, {userid}) => {
+    stall: async (parent, { userid }) => {
       const user = await User.findById(userid)
       return user.stall;
       //return await Stall.findById(_id).populate('products');
     },
-    stallProduct: async (parent, {_id}) => {
+    stallProduct: async (parent, { _id }) => {
       return await StallProduct.findById(_id).populate('productId');
     },
     order: async (parent, { _id }, context) => {
@@ -117,8 +117,11 @@ const resolvers = {
     addStall: async (parent, { name }, context) => {
       if (context.user) {
         const stall = new Stall({ name });
+        console.log(context.user._id);
 
-        await User.findByIdAndUpdate(context.user._id, { $push: { stall: stall } });
+        await User.findByIdAndUpdate(context.user._id, { stall: stall }, { upsert: true });
+
+        console.log(stall);
 
         return stall;
       }
@@ -143,7 +146,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateStall: async (parent, {_id, products}) => {
+    updateStall: async (parent, { _id, products }) => {
       return await Stall.findByIdAndUpdate(_id, { $inc: { products: products } }, { new: true });
     },
     updateStallProduct: async (parent, { _id, quantity }) => {

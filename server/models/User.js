@@ -30,8 +30,7 @@ const userSchema = new Schema({
     required: true,
     minlength: 5
   },
-  stall: Stall.schema,
-  orders: [Order.schema]
+  stall: Stall.schema
 });
 
 // set up pre-save middleware to create password

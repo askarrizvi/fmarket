@@ -41,7 +41,6 @@ const typeDefs = gql`
     email: String
     username: String
     stall: Stall
-    orders: [Order]
   }
 
   type Auth {
@@ -59,7 +58,10 @@ const typeDefs = gql`
     product(_id: ID!): Product
     user: User
     getUsers: User
+    getUserbyId(_id: ID!): User
     stall(userid: ID!): Stall
+    getStallbyId(_id: ID!): Stall
+    getAllStalls: Stall
     stallProduct(_id: ID!): StallProduct
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
@@ -70,7 +72,7 @@ const typeDefs = gql`
     addStall(name: String!): Stall
     addOrder(products: [ID]!): Order
     updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateStall(_id: ID! , products: [ID!]): Stall
+    updateStall(_id: ID! , productId: ID!, price: Float!, quantity: Int): StallProduct
     updateStallProduct(_id: ID!, quantity: Int): StallProduct
     login(email: String!, password: String!): Auth
   }

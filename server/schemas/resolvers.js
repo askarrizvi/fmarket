@@ -46,12 +46,26 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     getUsers: async () => {
-      return await User.find()
+      const users = await User.find();
+      //console.log(users);
+      return users;
+    },
+    getUserbyId: async(parent, { _id }) => {
+      const user = await User.findById(_id);
+      return user;
     },
     stall: async (parent, { userid }) => {
       const user = await User.findById(userid)
       return user.stall;
       //return await Stall.findById(_id).populate('products');
+    },
+    getStallbyId: async (parent, { _id }) => {
+      return await Stall.findById(_id);
+    },
+    getAllStalls: async () => {
+      const stalls = await Stall.find().populate('products');
+      console.log(stalls);
+      return stalls;
     },
     stallProduct: async (parent, { _id }) => {
       return await StallProduct.findById(_id).populate('productId');
@@ -115,10 +129,13 @@ const resolvers = {
     },
     addStall: async (parent, { name }, context) => {
       if (context.user) {
-        const stall = new Stall({ name });
+        const stall = await Stall.create({ name });
         console.log(context.user._id);
 
-        await User.findByIdAndUpdate(context.user._id, { stall: stall }, { upsert: true });
+        await User.findByIdAndUpdate(context.user._id, { stall: stall }, { new: true }, function (err, result){
+          console.log("error:" + err);
+          console.log("result:"+ result);
+        });
 
         console.log(stall);
 
@@ -145,8 +162,19 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    updateStall: async (parent, { _id, products }) => {
-      return await Stall.findByIdAndUpdate(_id, { $inc: { products: products } }, { new: true });
+    updateStall: async (parent, { _id, productId, price, quantity }, context) => {
+      if (context.user) {
+        const stallProduct = await StallProduct.create({ productId: productId,  price: price, quantity: quantity});
+
+        //console.log(Stall.findById(context.user.stall._id));
+        console.log(User.findById(context.user._id));
+
+        await Stall.findByIdAndUpdate(_id, { $push: { products: stallProduct } }, { new: true });
+
+        console.log(stallProduct);
+        return stallProduct.populate('productId');
+      }
+      throw new AuthenticationError('Not logged in');
     },
     updateStallProduct: async (parent, { _id, quantity }) => {
       const decrement = Math.abs(quantity) * -1;

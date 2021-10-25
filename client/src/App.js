@@ -14,6 +14,7 @@ import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Splash from './pages/Splash';
+import Test from './pages/Test';
 import Nav from './components/Nav';
 import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from './pages/OrderHistory';
@@ -49,6 +50,7 @@ function App() {
               <div>
                 <Nav />
                 <Switch>
+                <Route exact path="/test" component={Test} />
                   <Route exact path="/home" component={Home} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/signup" component={Signup} />

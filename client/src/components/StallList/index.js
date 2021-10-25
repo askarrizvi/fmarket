@@ -18,8 +18,9 @@ function ProductList() {
   const stalls = data?.stalls || [];
 
   useEffect(() => {
-    if(data) {
-      console.log(data)
+    if(stalls.length>0) {
+      console.log("Users data: ");
+      console.log(stalls);
       dispatch({
         type: UPDATE_STALLS,
         stalls: data.getUsers.map((user) => {

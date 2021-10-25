@@ -41,6 +41,9 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+    getUsers: async () => {
+      return await User.find();
+    },
     stall: async (parent, {_id}) => {
       return await Stall.findById(_id).populate('products');
     },

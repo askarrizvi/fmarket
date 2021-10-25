@@ -3,8 +3,9 @@ import { gql } from '@apollo/client';
 export const QUERY_USERS = gql`
   {
     getUsers {
-      name
+      username
       stall {
+        _id
         name
         upvotes
         products {
@@ -15,8 +16,6 @@ export const QUERY_USERS = gql`
           quantity
         }
       }
-      upvotes
-      products
     }
   }
 `

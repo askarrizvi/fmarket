@@ -45,6 +45,7 @@ function Nav() {
         <Link to="/">
         <img
             src={`/images/fmarketlogowhitetran.png`}
+            alt='Cart Icon'
           />
         </Link>
       </h1>

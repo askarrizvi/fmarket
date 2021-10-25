@@ -154,7 +154,7 @@ db.once('open', async () => {
     username: 'PamPam123',
     email: 'pamela@testmail.com',
     password: 'password12345',
-    stall: {name: stalls[0]}
+    stall: stalls[0]
   });
 
   await User.create({
@@ -163,7 +163,7 @@ db.once('open', async () => {
     username: 'eholt123',
     email: 'eholt@testmail.com',
     password: 'password12345',
-    stall: {name: stalls[1].name}
+    stall: stalls[1]
   });
 
   console.log('users seeded');

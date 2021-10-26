@@ -55,8 +55,7 @@ const resolvers = {
       return await Stall.findById(_id);
     },
     getAllStalls: async () => {
-      const stalls = await Stall.find().populate('products');
-      console.log(stalls);
+      const stalls = await Stall.find().populate('products.details');
       return stalls;
     },
     stall: async (parent, {_id}) => {

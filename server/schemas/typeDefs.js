@@ -61,7 +61,7 @@ const typeDefs = gql`
     getUserbyId(_id: ID!): User
     stall(userid: ID!): Stall
     getStallbyId(_id: ID!): Stall
-    getAllStalls: Stall
+    getAllStalls: [Stall]
     stallProduct(_id: ID!): StallProduct
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout

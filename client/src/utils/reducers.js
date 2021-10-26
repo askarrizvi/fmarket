@@ -13,6 +13,7 @@ import {
 import { useReducer } from 'react';
 
 export const reducer = (state, action) => {
+    //console.log(action);
     switch (action.type) {
         case UPDATE_PRODUCTS:
             return { ...state, products: [...action.products] };

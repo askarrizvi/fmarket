@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 
 import { Container, Row, Col, Button, Card } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,15 +9,29 @@ import { useStoreContext } from "../utils/GlobalState";
 import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
-  ADD_TO_CART
+  ADD_TO_CART,
+  UPDATE_STALLS
 } from '../utils/actions';
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
+import { QUERY_STALLS } from '../utils/queries';
 
 function StallDetails() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
+  const { loading, data } = useQuery(QUERY_STALLS);
 
+  useEffect(() => {
+    if (data) {
+      console.log(data.stalls);
+      dispatch({
+        type: UPDATE_STALLS,
+        stalls: data.getAllStalls
+      });
+    }
+  }, [data, dispatch]);
+
+  console.log(state.stalls);
   const stall = state.stalls.find(stall => stall._id === id)
 
   const { cart } = state;
@@ -56,6 +71,8 @@ function StallDetails() {
     idbPromise('cart', 'delete', { ...product });
   };
 
+  console.log(stall);
+
   return (
     <>
       {stall ? (
@@ -63,8 +80,10 @@ function StallDetails() {
           <Link to="/">← Back to Products</Link>
 
           <h2>{stall.name}</h2>
+          {console.log("here2")}
           <Container>
             <Row>
+              {console.log(stall.products)}
               {stall.products.map(product => (
                 <Col xs={12} lg={4} className='text-center'>
                   <Card style={{ width: '18rem' }}>
@@ -84,7 +103,7 @@ function StallDetails() {
           </Container>
         </div>
 
-      ) : null}
+      ) : <span>No Stalls</span>}
       {/* {loading ? <img src={spinner} alt="loading" /> : null} */}
       <Cart />
     </>

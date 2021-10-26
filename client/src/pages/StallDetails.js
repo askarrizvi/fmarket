@@ -13,7 +13,7 @@ import {
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
 
-function Detail() {
+function StallDetails() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
@@ -91,4 +91,4 @@ function Detail() {
   );
 }
 
-export default Detail;
+export default StallDetails;

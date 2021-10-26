@@ -46,13 +46,10 @@ const resolvers = {
       throw new AuthenticationError('Not logged in');
     },
     getUsers: async () => {
-      const users = await User.find();
-      //console.log(users);
-      return users;
+      return await User.find().populate('stall.products.details')
     },
     getUserbyId: async(parent, { _id }) => {
-      const user = await User.findById(_id);
-      return user;
+      return await User.findById(_id);
     },
     getStallbyId: async (parent, { _id }) => {
       return await Stall.findById(_id);

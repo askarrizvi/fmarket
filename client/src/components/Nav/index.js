@@ -3,7 +3,6 @@ import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
 
 function Nav() {
-
   function showNavigation() {
     if (Auth.loggedIn()) {
       return (
@@ -18,6 +17,20 @@ function Nav() {
             <a href="/" onClick={() => Auth.logout()}>
               Logout
             </a>
+          </li>
+          <li className="mx-1">
+            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+            {/* <Link to={`/MyStall/${me.data._id}`}>
+              My Stall
+            </Link> */}
+             
+          </li>
+          <li className="mx-1">
+            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+            <Link to="/home/">
+              View All Stalls
+            </Link>
+             
           </li>
         </ul>
       );

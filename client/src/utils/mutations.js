@@ -51,3 +51,17 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+// export const ADD_STALL = gql`
+//   mutation addStall ($name: String!, $upvotes: Int, $products: [String!]) {
+//     addStall (name: $name, upvotes: $upvotes, email: $email, products: $products) {
+//       name
+//       upvotes
+//       products {
+//         name
+//         description
+//         image
+//         category
+//       }
+//     }
+// `;

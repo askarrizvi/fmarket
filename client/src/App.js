@@ -17,6 +17,7 @@ import Splash from './pages/Splash';
 import Test from './pages/Test';
 import Nav from './components/Nav';
 import StallDetails from './pages/StallDetails'
+import MyStall from './pages/MyStall'
 import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from './pages/OrderHistory';
 import Success from './pages/Success'
@@ -57,6 +58,7 @@ function App() {
                   <Route exact path="/signup" component={Signup} />
                   <Route exact path="/orderHistory" component={OrderHistory} />
                   <Route exact path="/stall/:id" component={StallDetails} />
+                  <Route exact path="/myStall/:id" component={MyStall} />
                   <Route exact path="/success" component={Success} />
                   <Route component={NoMatch} />
                 </Switch>

@@ -59,7 +59,7 @@ const typeDefs = gql`
     user: User
     getUsers: [User]
     getUserbyId(_id: ID!): User
-    stall(userid: ID!): Stall
+    stall(_id: ID!): Stall
     getStallbyId(_id: ID!): Stall
     getAllStalls: Stall
     stallProduct(_id: ID!): StallProduct
@@ -74,6 +74,7 @@ const typeDefs = gql`
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateStall(_id: ID! , productId: ID!, price: Float!, quantity: Int): StallProduct
     updateStallProduct(_id: ID!, quantity: Int): StallProduct
+    addProduct: StallProduct
     login(email: String!, password: String!): Auth
   }
 `;

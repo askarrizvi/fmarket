@@ -27,29 +27,23 @@ const resolvers = {
       return await Product.findById(_id).populate('category');
     },
     user: async (parent, args, context) => {
-      if (context.user) {
-        /*const user = await User.findById(context.user._id).populate({
-          path: 'orders.products',
-          populate: 'category'
-        });
-
-        user.orders.sort((a, b) => b.purchaseDate - a.purchaseDate);
-
-        return user;*/
-
-        const user = await User.findById(context.user._id);
-
-
-        return user;
-      }
-
+      if(context.user) {
+      const userData = User.findOne({_id:context.user._id})
+        .select('-__v -password')
+        
+  
+      return userData;
+  }
       throw new AuthenticationError('Not logged in');
-    },
+  
+  
+  },
     getUsers: async () => {
       return await User.find().populate('stall.products.details')
     },
     getUserbyId: async(parent, { _id }) => {
-      return await User.findById(_id);
+      return await User.findById(_id)
+      .populate('stall.products.details');
     },
     getStallbyId: async (parent, { _id }) => {
       return await Stall.findById(_id);

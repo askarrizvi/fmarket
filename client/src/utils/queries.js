@@ -78,25 +78,35 @@ export const QUERY_CATEGORIES = gql`
 `;
 
 export const QUERY_USER = gql`
-  {
-    user {
-      firstName
-      lastName
-      orders {
+ {
+  user {
+    _id
+    firstName
+    lastName
+    email
+    username
+    stall {
+      _id
+      name
+      upvotes
+      products {
         _id
-        purchaseDate
-        products {
+        details {
           _id
-          name
           description
-          price
-          quantity
           image
+          category {
+            _id
+            name
+          }
         }
       }
+
     }
-  }
-`;
+    
+}
+}
+`
 
 export const QUERY_CHECKOUT = gql`
   query getCheckout($products: [ID]!) {
@@ -105,3 +115,34 @@ export const QUERY_CHECKOUT = gql`
     }
   }
 `;
+
+export const QUERY_USER_BY_ID = gql`
+    query getUserbyId ($id: ID!) {
+      getUserbyId (id: $_id) {
+        _id
+        firstName
+        lastName
+        email
+        username
+        stall {
+          _id
+          name
+          upvotes
+          products {
+            _id
+            details {
+              _id
+              description
+              image
+              category {
+                _id
+                name
+              }
+            }
+          }
+
+        }
+        
+    }
+  }
+`

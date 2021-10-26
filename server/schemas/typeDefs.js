@@ -17,7 +17,7 @@ const typeDefs = gql`
   type Order {
     _id: ID
     purchaseDate: String
-    products: [Product]
+    products: [StallProduct]
   }
 
   type Stall {

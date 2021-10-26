@@ -15,6 +15,7 @@ const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 const Cart = () => {
     const [state, dispatch] = useStoreContext();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
+    //console.log(state);
 
     useEffect(() => {
         async function getCart() {
@@ -29,6 +30,7 @@ const Cart = () => {
 
     useEffect(() => {
         if (data) {
+            console.log("here");
             stripePromise.then((res) => {
                 res.redirectToCheckout({ sessionId: data.checkout.session });
             });
@@ -42,7 +44,9 @@ const Cart = () => {
     function calculateTotal() {
         let sum = 0;
         state.cart.forEach(item => {
-            sum += item.price * item.purchaseQuantity;
+            if (item.stallId === state.currentStall) {
+                sum += item.price * item.purchaseQuantity;
+            }
         });
         return sum.toFixed(2);
     }
@@ -51,8 +55,10 @@ const Cart = () => {
         const productIds = [];
 
         state.cart.forEach((item) => {
-            for (let i = 0; i < item.purchaseQuantity; i++) {
-                productIds.push(item._id);
+            if (item.stallId === state.currentStall) {
+                for (let i = 0; i < item.purchaseQuantity; i++) {
+                    productIds.push(item._id);
+                }
             }
         });
         getCheckout({
@@ -70,13 +76,18 @@ const Cart = () => {
         );
     }
 
+    function filterCart() {
+        return state.cart.filter(item => item.stallId === state.currentStall);
+    }
+
+
     return (
         <div className="cart">
             <div className="close" onClick={toggleCart}>[close]</div>
             <h2>Shopping Cart</h2>
             {state.cart.length ? (
                 <div>
-                    {state.cart.map(item => (
+                    {filterCart().map((item) => (
                         <CartItem key={item._id} item={item} />
                     ))}
                     <div className="flex-row space-between">

@@ -59,7 +59,7 @@ const resolvers = {
       return stalls;
     },
     stall: async (parent, {_id}) => {
-      return await Stall.findById(_id).popuate('products.details')
+      return await Stall.findById(_id).populate('products.details')
     },
     stallProduct: async (parent, {_id}) => {
       return await StallProduct.findById(_id).populate('details');
@@ -79,15 +79,18 @@ const resolvers = {
     checkout: async (parent, args, context) => {
       const url = new URL(context.headers.referer).origin;
       const order = new Order({ products: args.products });
-      const { products } = await order.populate('products').execPopulate();
+      const { products } = await order.populate('products.details').execPopulate();
       const line_items = [];
+      console.log(args.products);
+      console.log(order);
+      console.log(products)
 
       for (let i = 0; i < products.length; i++) {
         // generate product id
         const product = await stripe.products.create({
-          name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+          name: products[i].details.name,
+          description: products[i].details.description,
+          images: [`${url}/images/${products[i].details.image}`]
         });
 
         // generate price id using the product id

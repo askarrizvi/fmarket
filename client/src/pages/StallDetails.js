@@ -20,6 +20,7 @@ function StallDetails() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
   const { loading, data } = useQuery(QUERY_STALLS);
+  //console.log(state);
 
   useEffect(() => {
     if (data) {
@@ -87,7 +88,7 @@ function StallDetails() {
                       <Card.Text> {product.details.description} </Card.Text>
                       <Card.Text> Quantity: {product.quantity} </Card.Text>
                       <Card.Text> Price: {product.price} </Card.Text>
-                      <Button variant="primary" onClick={() => { addToCart(product) }}>Add to cart</Button>
+                      <Button variant="primary" onClick={() => { addToCart({...product, stallId: stall._id}) }}>Add to cart</Button>
                       <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
                     </Card.Body>
                   </Card>

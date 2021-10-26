@@ -73,7 +73,7 @@ function StallDetails() {
     <>
       {stall ? (
         <div>
-          <Link to="/">← Back to Products</Link>
+          <Link to="/home">← Back to Stalls</Link>
 
           <h2>{stall.name}</h2>
           <Container>

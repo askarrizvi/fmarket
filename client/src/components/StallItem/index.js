@@ -1,9 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { pluralize } from "../../utils/helpers"
-import { useStoreContext } from '../../utils/GlobalState';
-import { ADD_TO_CART, UPDATE_CART_QUANTITY } from '../../utils/actions';
-import { idbPromise } from "../../utils/helpers";
 
 function ProductItem(stall) {
   const {
@@ -18,9 +14,9 @@ function ProductItem(stall) {
         <p>{name}</p>
       </Link>
       <div>
-      <button>👍</button>
-      <p>{upvotes}</p>
-      <button>👎</button>
+        <button onClick={() => {return upvotes + 1}}>👍</button>
+        <p>{upvotes}</p>
+        <button onClick={() => {return upvotes - 1}}>👎</button>
       </div>
      
     </div>

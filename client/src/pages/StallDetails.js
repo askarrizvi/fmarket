@@ -23,7 +23,6 @@ function StallDetails() {
 
   useEffect(() => {
     if (data) {
-      console.log(data.stalls);
       dispatch({
         type: UPDATE_STALLS,
         stalls: data.getAllStalls
@@ -31,14 +30,13 @@ function StallDetails() {
     }
   }, [data, dispatch]);
 
-  console.log(state.stalls);
   const stall = state.stalls.find(stall => stall._id === id)
 
   const { cart } = state;
 
   const addToCart = (product) => {
+    //console.log(product)
     const itemInCart = cart.find((cartItem) => cartItem._id === product._id)
-    console.log(itemInCart)
 
     if (itemInCart) {
       dispatch({
@@ -71,8 +69,6 @@ function StallDetails() {
     idbPromise('cart', 'delete', { ...product });
   };
 
-  console.log(stall);
-
   return (
     <>
       {stall ? (
@@ -80,10 +76,8 @@ function StallDetails() {
           <Link to="/">← Back to Products</Link>
 
           <h2>{stall.name}</h2>
-          {console.log("here2")}
           <Container>
             <Row>
-              {console.log(stall.products)}
               {stall.products.map(product => (
                 <Col xs={12} lg={4} className='text-center'>
                   <Card style={{ width: '18rem' }}>

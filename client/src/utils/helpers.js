@@ -6,6 +6,9 @@ export function pluralize(name, count) {
 }
 
 export function idbPromise(storeName, method, object) {
+  console.log(storeName);
+  console.log(method);
+  console.log(object);
   return new Promise((resolve, reject) => {
     // open connection to the database `shop-shop` with the version of 1
     const request = window.indexedDB.open('fmarket', 1);

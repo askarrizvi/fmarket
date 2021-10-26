@@ -51,6 +51,7 @@ export const QUERY_STALLS = gql`
     name
     upvotes
     products {
+      _id
       details {
         name
         description

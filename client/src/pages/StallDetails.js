@@ -74,21 +74,20 @@ function StallDetails() {
     <>
       {stall ? (
         <div>
-          <Link to="/home">← Back to Stalls</Link>
-
-          <h2>{stall.name}</h2>
+          <Link className='m-3' to="/home">← View All Stalls</Link>
+          <h2 className='m-3'>{stall.name}</h2>
           <Container>
             <Row>
               {stall.products.map(product => (
                 <Col xs={12} lg={4} className='text-center'>
-                  <Card style={{ width: '18rem' }}>
+                  <Card style={{ width: '22rem' }}>
                     <Card.Img variant="top" src={`/images/${product.details.image}`} alt={product.details.name} />
                     <Card.Body>
                       <Card.Title>{product.details.name}</Card.Title>
                       <Card.Text> {product.details.description} </Card.Text>
                       <Card.Text> Quantity: {product.quantity} </Card.Text>
                       <Card.Text> Price: {product.price} </Card.Text>
-                      <Button variant="primary" onClick={() => { addToCart({...product, stallId: stall._id}) }}>Add to cart</Button>
+                      <Button className='m-2' variant="primary" onClick={() => { addToCart({...product, stallId: stall._id}) }}>Add to cart</Button>
                       <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
                     </Card.Body>
                   </Card>

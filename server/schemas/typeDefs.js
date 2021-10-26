@@ -23,7 +23,9 @@ const typeDefs = gql`
   type Stall {
     _id: ID
     name: String
+    description: String
     upvotes: Int
+    image: String
     products: [StallProduct]
   }
 

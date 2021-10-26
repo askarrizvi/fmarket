@@ -31,7 +31,7 @@ const ProductForm = (props) => {
         // const result = await createItem (item);
 
         // setItem([...items,result])
-    }
+    // }
 
     // useEffect (() => {
     //     const fetchData = async () => {
@@ -42,100 +42,97 @@ const ProductForm = (props) => {
     //     fetchData ()
     // },[])
 
-  
     return  (
       <div>
-        <p> Add your Product here</p>
-          <form onSubmit={handleFormSubmit}>
+          {/* <p> Add your Product here</p>
+          <form onSubmit={handleFormSubmit}> */}
               {/* <p>Category</p> */}
-                <div class="custom-select">
-                      <select>
-                        <option value='0'>Select a product category:</option>
-                        <option value='Fruit'
-                          name='fruit'>
-                            Fruits
-                        </option>
-                        <option value='Veggitable'
-                          name='veggitable'>
-                            Veggitables
-                        </option>
-                      </select>
-                  </div>
+            {/* <div class="custom-select">
+                  <select>
+                    <option value='0'>Select a product category:</option>
+                    <option value='Fruit'
+                      name='fruit'>
+                        Fruits
+                    </option>
+                    <option value='Veggitable'
+                      name='veggitable'>
+                        Veggitables
+                    </option>
+                  </select>
+              </div>
 
-                  <div>
-                    <input
-                      className='product-input'
-                      placeholder='Product name'
-                      name='productname'
-                      type='productname'
-                      id='productname'
-                      value={formState1.name}
-                      onChange={handleChange1}
-                    />
-                  </div>
+              <div>
+                <input
+                  className='product-input'
+                  placeholder='Product name'
+                  name='productname'
+                  type='productname'
+                  id='productname'
+                  value={formState1.name}
+                  onChange={handleChange1}
+                />
+              </div>
 
-                  <div>
-                      <p>Description</p>
-                      {/* <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}> */}
-                          {/* Character Count: {characterCount}/280 */}
-                          {/* {error && <span className="ml-2">Something went wrong...</span>} */}
-                      {/* </p> */}
-                        <textarea
-                          placeholder="add brief description of the product..."
-                          className='form-input col-12 col-md-9'
-                          value={formState1.description}
-                          onChange={handleChange1}>
-                        </textarea>
-                  </div>
+              <div>
+                  <p>Description</p> */}
+                  {/* <p className={`m-0 ${characterCount === 280 || error ? 'text-error' : ''}`}> */}
+                      {/* Character Count: {characterCount}/280 */}
+                      {/* {error && <span className="ml-2">Something went wrong...</span>} */}
+                  {/* </p> */}
+                    {/* <textarea
+                      placeholder="add brief description of the product..."
+                      className='form-input col-12 col-md-9'
+                      value={formState1.description}
+                      onChange={handleChange1}>
+                    </textarea>
+              </div>
 
-                  <div>
-                    <input
-                      className='product-input'
-                      placeholder='Quantity'
-                      name='quantity'
-                      type='quantity'
-                      id='quantity'
-                      value={formState2.quantity}
-                      // onChange={handleChange2}
-                      />
-                  </div>
-                  
-                  <div>
-                    <input
-                      className='product-input'
-                      placeholder='Price/kg'
-                      name='price'
-                      type='price'
-                      id='price'
-                      value={formState2.price}
-                      // onChange={handleChange2}
-                      />
-                  </div>
+              <div>
+                <input
+                  className='product-input'
+                  placeholder='Quantity'
+                  name='quantity'
+                  type='quantity'
+                  id='quantity'
+                  value={formState2.quantity} */}
+                  {/* onChange={handleChange2} */}
+                  />
+              {/* </div>
+              
+              <div>
+                <input
+                  className='product-input'
+                  placeholder='Price/kg'
+                  name='price'
+                  type='price'
+                  id='price'
+                  value={formState2.price} */}
+                  {/* onChange={handleChange2} */}
+                  />
+              {/* </div>
 
-
-
-                  <p>Image</p>
-                  <input
-                      className='product-input'
-                      placeholder='attach image here'
-                      name='image'
-                      type='image'
-                      id='image'
-                      value={formState1.image}
-                      onChange={handleChange1}
-                    />
+              <p>Image</p>
+              <input
+                  className='product-input'
+                  placeholder='attach image here'
+                  name='image'
+                  type='image'
+                  id='image'
+                  value={formState1.image}
+                  onChange={handleChange1}
+                />
                     <FileBase64
                     multiple={ false }
                     onDone={({base64}) => setItem({ ...
                       item, image: base64})} />
 
-                    <button className='btn d-block w-100' type='submit'>
-                      Submit
-                    </button>
+                <button className='btn d-block w-100' type='submit'>
+                  Submit
+                </button> */}
                     {/* {error && <div>attempted failed</div>} */}
-          </form>
+          {/* </form> */}
       </div>
-      );
-    };
+      )
+    }
     
     export default ProductForm;

@@ -41,7 +41,6 @@ function Signup(props) {
         <Col xs={12} xl={4}></Col>
         <Col xs={12} xl={4} className='text-center mb-5'><img src='/images/fmarketlogoblack.jpg' alt='f market logo' style={{ marginTop: '5rem', width: '15rem' }}></img></Col>
         <Col xs={12} xl={4}>
-            <Link to="/">← Go to Login</Link>
 
             <Card className='mt-5 mx-auto shadow p-3 mb-5 bg-white rounded' style={{ width: '80%' }}>
               <Card.Body>
@@ -103,12 +102,13 @@ function Signup(props) {
                       onChange={handleChange}
                     />
                   </div>
-                  <div className="flex-row flex-end">
+                  <div className="flex-row">
                     <Button type="submit">Submit</Button>
                   </div>
                 </Form>
                 </Card.Text>
               </Card.Body>
+              <Link to="/">Already have an account? Login</Link>
               <Link to='/home' style={{ textDecoration: 'none' }}>Continue as guest</Link>
             </Card>
         </Col>

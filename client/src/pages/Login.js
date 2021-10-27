@@ -69,7 +69,7 @@ function Login(props) {
                     <p className="error-text">The provided credentials are incorrect</p>
                   </Card.Text>
                 ) : null}
-                <div className="flex-row flex-end">
+                <div className="flex-row">
                   <Button type="submit">Submit</Button>
                 </div>
               </Form>

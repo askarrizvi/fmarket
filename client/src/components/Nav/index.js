@@ -38,7 +38,7 @@ function Nav() {
             </Link>
           </li>
           <li className="mx-1">
-            <Link style={{ textDecoration: 'none' }} to="/login">
+            <Link style={{ textDecoration: 'none' }} to="/">
               Login
             </Link>
           </li>

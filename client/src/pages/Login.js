@@ -38,9 +38,9 @@ function Login(props) {
         <Col xs={12} lg={4}></Col>
         <Col xs={12} lg={4}><img src='/images/fmarketlogoblack.jpg' alt='f market logo' style={{ marginTop: '5rem', width: '15rem' }}></img></Col>
         <Col xs={12} lg={4}>
-            <Link to="/signup">← Go to Signup</Link>
-            <Card className='mt-5 mx-auto shadow p-3 mb-5 bg-white rounded' style={{ width: '80%' }}>
-              <Card.Body>
+          <Link to="/signup">← Go to Signup</Link>
+          <Card className='mt-5 mx-auto shadow p-3 mb-5 bg-white rounded' style={{ width: '80%' }}>
+            <Card.Body>
               <Card.Title>Login</Card.Title>
               <Form className='mx-4' onSubmit={handleFormSubmit}>
                 <Card.Text className="flex-row space-between mt-4">
@@ -74,8 +74,9 @@ function Login(props) {
                   <Button type="submit">Submit</Button>
                 </div>
               </Form>
-              </Card.Body>
-            </Card>
+            </Card.Body>
+            <Link to='/home' style={{ textDecoration: 'none' }}>Continue as guest</Link>
+          </Card>
         </Col>
       </Row>
     </Container>

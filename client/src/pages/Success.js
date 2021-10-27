@@ -6,7 +6,7 @@ import { idbPromise } from "../utils/helpers";
 
 function Success() {
     setTimeout(() => {
-        window.location.assign('/');
+        window.location.assign('/home');
     }, 3000);
 
     return (

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 
-import ProductItem from '../StallItem';
+import StallItem from '../StallItem';
 import { QUERY_USERS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { useStoreContext } from '../../utils/GlobalState';
@@ -31,7 +31,7 @@ function ProductList() {
       {products.length ? (
         <div className="flex-row">
           {filterProducts().map((product) => (
-            <ProductItem
+            <StallItem
               key={product._id}
               _id={product._id}
               image={product.image}

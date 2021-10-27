@@ -52,16 +52,35 @@ export const ADD_USER = gql`
   }
 `;
 
-// export const ADD_STALL = gql`
-//   mutation addStall ($name: String!, $upvotes: Int, $products: [String!]) {
-//     addStall (name: $name, upvotes: $upvotes, email: $email, products: $products) {
-//       name
-//       upvotes
-//       products {
-//         name
-//         description
-//         image
-//         category
-//       }
+export const ADD_STALL = gql`
+  mutation addStall($name: String!,) {
+    addStall(name: $name) {
+      name
+    }
+  }
+`;
+
+// export const ADD_PRODUCT = gql`
+//   mutation addProduct($product: String, $description, String) {
+//     addProduct(product: $product, description: $description) {
+//       product
+//       description
 //     }
+//   }
 // `;
+
+export const ADD_LIKE = gql`
+  mutation addLike($_id: ID!) {
+    addLike(_id: $_id) {
+      upvotes
+    }
+  }
+`
+
+export const REMOVE_LIKE = gql`
+  mutation removeLike($_id: ID!) {
+    removeLike(_id: $_id) {
+      upvotes
+    }
+  }
+`

@@ -3,9 +3,7 @@ import { useQuery } from '@apollo/client';
 import {  useParams } from 'react-router-dom';
 import Auth from '../utils/auth';
 
-import ProductForm from '../components/ProductForm';
-import ProductList from '../components/ProductList';
-import StallItem from '../components/StallItem';
+import StallForm from '../components/StallForm';
 import { QUERY_USER } from '../utils/queries';
 import { Link } from 'react-router-dom';
 
@@ -17,35 +15,36 @@ const MyStall = () => {
   const { data: userData } = useQuery(QUERY_USER);
   console.log(userData);
   const currentUserStallId = (userData?.user?.stall._id) || {};
-  console.log(currentUserStallId);
+  const currentUserStallName = (userData?.user?.stall.name) || {};
+  console.log(currentUserStallName);
   
   
   return (
     <div>
       <h2>Farmer's Market Stalls:</h2>
-      <div className="card px-1 py-1 centre">
         {Auth.loggedIn() &&  !currentUserStallId ? ( 
           <>
           <p>Create you own Stall here</p>
-        <Link to={`/stall/{${currentUserStallId}}`}>
+        <Link to={`/MyStall/{1}`}>
           <button>+</button>
         </Link>
         </>
         ) : (!Auth.loggedIn()) ? (
         <p>Login/Signup to create or modify your own stall</p>
         ):(
-        <p>You own a stall already, click{' '}
+        <p>You own a stall on FMarket already. Creating a New stall will lose your previous spot as now,  one spot per farmer is only available. Click{' '}
             <span> 
-              <Link to={`/stall/{${currentUserStallId}`}> 
+              <Link to={`/stall/{${currentUserStallId}/`}> 
                 here 
               </Link>
             </span>{' '}
-                to view to add more products to  your stall.
+                to view your stall and products.
         </p>
         )}
+      <div className="card px-1 py-1 centre">
       
       </div>
-      {/* <ProductForm  /> */}
+      <StallForm  />
     {/* <div className="my-2">hi
       {data.length ? (
         <div className="flex-row">

@@ -17,13 +17,15 @@ const typeDefs = gql`
   type Order {
     _id: ID
     purchaseDate: String
-    products: [Product]
+    products: [StallProduct]
   }
 
   type Stall {
     _id: ID
     name: String
+    description: String
     upvotes: Int
+    image: String
     products: [StallProduct]
   }
 
@@ -59,9 +61,10 @@ const typeDefs = gql`
     user: User
     getUsers: [User]
     getUserbyId(_id: ID!): User
-    stall(_id: ID!): Stall
+    stall(userid: ID!): User
     getStallbyId(_id: ID!): Stall
-    getAllStalls: Stall
+    getStallbyProdId(prodId: ID): Stall
+    getAllStalls: [Stall]
     stallProduct(_id: ID!): StallProduct
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
@@ -71,10 +74,12 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!): Auth
     addStall(name: String!): Stall
     addOrder(products: [ID]!): Order
+    addLike(_id: ID!): Stall
+    removeLike(_id: ID!): Stall
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateStall(_id: ID! , productId: ID!, price: Float!, quantity: Int): StallProduct
     updateStallProduct(_id: ID!, quantity: Int): StallProduct
-    addProduct: StallProduct
+    addProduct(product: String): Product
     login(email: String!, password: String!): Auth
   }
 `;

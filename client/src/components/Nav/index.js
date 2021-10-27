@@ -9,13 +9,14 @@ function Nav() {
         <ul className="flex-row">
           <li className="mx-1">
                 <Link to="/MyStall/">
-                  New Stall
-                </Link>
-          <li className="mx-1">
-                <Link to={`/home`}>
-                  View All Stall
+                  Add Stall
                 </Link>
           </li>
+          <li className="mx-1">
+                <Link to={`/home`}>
+                  All Stalls
+                </Link>
+          
           </li>
           <li className="mx-1">
                 <Link to="/orderHistory">

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import FileBase64 from 'react-file-base64';
 import { useMutation } from '@apollo/client'
-import { ADD_PRODUCT } from '../../utils/mutations';
+import { ADD_STALL } from '../../utils/mutations';
 
-const ProductForm = (props) => {
-    // const [addProduct, { error }] = useMutation(ADD_PRODUCT);
-    const [formState, setFormState] = useState({ product: '', description:'0', image: '', category:'' });
+const StallForm = (props) => {
+    const [addStall, { error }] = useMutation(ADD_STALL);
+    const [formState, setFormState] = useState({ name: '', upvote:'0', image: '' });
     const [item, setItem] = useState ({image:''})
     // const [items, setItems] = useState ([]);
   
@@ -24,25 +24,25 @@ const ProductForm = (props) => {
     event.preventDefault();
   
     // use try/catch instead of promises to handle errors
-    // try {
-    //   // execute addUser mutation and pass in variable data from form
-    //   const { data } = await addProduct({
-    //     variables: { ...formState,  }
-    //   });
-    //   console.log(data);
-    // } catch (e) {
-    //   console.error(e);
-    // }
-    window.location.replace('/home') 
+    try {
+      // execute addUser mutation and pass in variable data from form
+      const { data } = await addStall({
+        variables: { ...formState,  }
+      });
+      console.log(data);
+    } catch (e) {
+      console.error(e);
+    }
+    window.location.replace('products') 
     .then(window.reload()) 
   }
   
     return (
         <div>
-       <h2>Add Your Products </h2>
+       <h2>Add New Stall (This action will lose your previous spot)</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
-          <label htmlFor="name">Product:</label>
+          <label htmlFor="name">Stall Name:</label>
           <input
             placeholder="name"
             name="name"
@@ -53,13 +53,13 @@ const ProductForm = (props) => {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="upvote"> Description:</label>
+          <label htmlFor="upvote"> Upvote:</label>
           <input
-            placeholder="description"
-            name="description"
-            type="description"
-            id="description"
-            value={formState.description}
+            placeholder="upvote"
+            name="upvote"
+            type="upvote"
+            id="upvote"
+            value={0}
             onChange={handleChange}
           />
         </div>
@@ -78,24 +78,13 @@ const ProductForm = (props) => {
                     multiple={ false }
                     onDone={({base64}) => setItem({ ...
                       item, image: base64})} />
-        <div className="flex-row space-between my-2">
-          <label htmlFor="category"> Category:</label>
-          <input
-            placeholder="Fruit/Veggitable"
-            name="category"
-            type="category"
-            id="category"
-            value={formState.category}
-            onChange={handleChange}
-          />
-        </div>
         <div className="flex-row flex-end">
           <button type="submit">Submit</button>
         </div>
-        {/* {error && <div>Failed!</div>} */}
+        {error && <div>Failed!</div>}
       </form>
     </div>
   );
 }
     
-    export default ProductForm;
+    export default StallForm;

@@ -1,6 +1,7 @@
 import {
     UPDATE_PRODUCTS,
     UPDATE_STALLS,
+    UPDATE_CURRENT_STALL,
     UPDATE_CATEGORIES,
     UPDATE_CURRENT_CATEGORY,
     ADD_TO_CART,
@@ -13,12 +14,15 @@ import {
 import { useReducer } from 'react';
 
 export const reducer = (state, action) => {
+    //console.log(action);
     switch (action.type) {
         case UPDATE_PRODUCTS:
             return { ...state, products: [...action.products] };
         // if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
         case UPDATE_STALLS:
             return { ...state, stalls: [...action.stalls] };
+        case UPDATE_CURRENT_STALL:
+            return { ...state, currentStall: action.currentStall };
         // if action type value is the value of `UPDATE_CATEGORIES`, return a new state object with an updated categories array
         case UPDATE_CATEGORIES:
             return { ...state, categories: [...action.categories] };

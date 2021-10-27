@@ -39,7 +39,7 @@ function StallItem(stall) {
         <Link to={`/stall/${_id}`} style={{ color: 'black', textDecoration: 'none' }} >
           <Card.Img variant="top" src={`/images/${image}`} alt={name} />
 
-          <p>{name}</p>
+          <p style={{ textDecoration: 'underline' }}>{name}</p>
 
           <p style={{ fontWeight: 'normal' }}>{description}</p>
         </Link>

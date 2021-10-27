@@ -84,7 +84,7 @@ function StallDetails() {
       {stall ? (
         <div>
           <Link className='m-3' to="/home">← View All Stalls</Link>
-          <h2 className='m-3'>{stall.name}</h2>
+          <h2 style={{ textDecoration: 'underline' }} className='m-5 text-center'>{stall.name}</h2>
           <Container>
             <Row>
               {stall.products.map(product => (

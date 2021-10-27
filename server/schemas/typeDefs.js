@@ -23,7 +23,9 @@ const typeDefs = gql`
   type Stall {
     _id: ID
     name: String
+    description: String
     upvotes: Int
+    image: String
     products: [StallProduct]
   }
 
@@ -72,6 +74,8 @@ const typeDefs = gql`
     addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!): Auth
     addStall(name: String!): Stall
     addOrder(products: [ID]!): Order
+    addLike(_id: ID!): Stall
+    removeLike(_id: ID!): Stall
     updateUser(firstName: String, lastName: String, email: String, password: String): User
     updateStall(_id: ID! , productId: ID!, price: Float!, quantity: Int): StallProduct
     updateStallProduct(_id: ID!, quantity: Int): StallProduct

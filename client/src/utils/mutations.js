@@ -51,3 +51,19 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+export const ADD_LIKE = gql`
+  mutation addLike($_id: ID!) {
+    addLike(_id: $_id) {
+      upvotes
+    }
+  }
+`
+
+export const REMOVE_LIKE = gql`
+  mutation removeLike($_id: ID!) {
+    removeLike(_id: $_id) {
+      upvotes
+    }
+  }
+`

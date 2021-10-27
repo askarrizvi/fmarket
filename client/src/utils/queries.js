@@ -7,6 +7,8 @@ export const QUERY_USERS = gql`
       stall {
         _id
         name
+        description
+        image
         upvotes
         products {
           _id

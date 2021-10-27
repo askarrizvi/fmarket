@@ -176,6 +176,12 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+    addLike: async(parent, {_id}) => {
+      return await Stall.findOneAndUpdate(_id, {$inc: {'upvotes' : 1}})
+    },
+    removeLike: async(parent, {_id}) => {
+      return await Stall.findOneAndUpdate(_id, {$inc: {'upvotes' : -1}})
+    },
     updateUser: async (parent, args, context) => {
       if (context.user) {
         return await User.findByIdAndUpdate(context.user._id, args, { new: true });

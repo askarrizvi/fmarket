@@ -10,10 +10,17 @@ const orderSchema = new Schema({
   products: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Product'
-    }
+      ref: 'StallProduct'
+    } 
   ]
 });
+
+/*
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Stall.products'
+    } 
+    */
 
 const Order = mongoose.model('Order', orderSchema);
 

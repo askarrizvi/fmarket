@@ -14,6 +14,12 @@ const stallSchema = new Schema({
         min: 0,
         default: 0
     },
+    image: {
+        type: String
+    },
+    description: {
+        type: String,
+    },
     products: [StallProduct.schema]
 });
 

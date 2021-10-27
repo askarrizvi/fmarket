@@ -16,11 +16,11 @@ function ProductList() {
   const [state, dispatch] = useStoreContext();
 
   const { loading, data } = useQuery(QUERY_USERS);
-  const { data: userData } = useQuery(QUERY_USER);
+  // const { data: userData } = useQuery(QUERY_USER);
   console.log(data);
-  console.log(userData);
-  const currentUserStallId = (userData?.user?.stall._id) || {};
-  console.log(currentUserStallId);
+  // console.log(userData);
+  // const currentUserStallId = (userData?.user?.stall._id) || {};
+  // console.log(currentUserStallId);
   
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function ProductList() {
   return (
     <div className="my-2">
       <h2>Farmer's Market Stalls:</h2>
-      <div className="card px-1 py-1 centre">
+      {/* <div className="card px-1 py-1 centre">
         {Auth.loggedIn() &&  !currentUserStallId ? ( 
           <>
           <p>Create you own Stall here</p>
@@ -60,7 +60,7 @@ function ProductList() {
         <p>Login/Signup to create or modify your own stall</p>
         ):(
         <p>You have a stall already, click to your stall</p>)}
-      </div>
+      </div> */}
         {state.stalls.length ? (
           <div className="flex-row">
             {state.stalls.map(stall => (

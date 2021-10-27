@@ -4,23 +4,48 @@ import {  useParams } from 'react-router-dom';
 import Auth from '../utils/auth';
 
 import ProductForm from '../components/ProductForm';
+import ProductList from '../components/ProductList';
 import StallItem from '../components/StallItem';
-import { QUERY_USER_BY_ID } from '../utils/queries';
+import { QUERY_USER } from '../utils/queries';
+import { Link } from 'react-router-dom';
 
 const MyStall = () => {
   const { id: userParam } = useParams();
   const me = Auth.getProfile()
   console.log(me)
-  // console.log(me.data._id)
-  // const { data } = useQuery(QUERY_USER_BY_ID, {
-  //   variables: {id:me.data._id}
-  // });
-   
-  // const user = data?.user;
-  // console.log(user)
+
+  const { data: userData } = useQuery(QUERY_USER);
+  console.log(userData);
+  const currentUserStallId = (userData?.user?.stall._id) || {};
+  console.log(currentUserStallId);
+  
+  
   return (
     <div>
-      <ProductForm  />
+      <h2>Farmer's Market Stalls:</h2>
+      <div className="card px-1 py-1 centre">
+        {Auth.loggedIn() &&  !currentUserStallId ? ( 
+          <>
+          <p>Create you own Stall here</p>
+        <Link to={`/stall/{${currentUserStallId}}`}>
+          <button>+</button>
+        </Link>
+        </>
+        ) : (!Auth.loggedIn()) ? (
+        <p>Login/Signup to create or modify your own stall</p>
+        ):(
+        <p>You own a stall already, click{' '}
+            <span> 
+              <Link to={`/stall/{${currentUserStallId}`}> 
+                here 
+              </Link>
+            </span>{' '}
+                to view to add more products to  your stall.
+        </p>
+        )}
+      
+      </div>
+      {/* <ProductForm  /> */}
     {/* <div className="my-2">hi
       {data.length ? (
         <div className="flex-row">

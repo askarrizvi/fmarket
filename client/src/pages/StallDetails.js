@@ -11,9 +11,12 @@ import {
   ADD_TO_CART
 } from '../utils/actions';
 import Cart from '../components/Cart';
+import ProductForm from '../components/ProductForm';
+
 import { idbPromise } from "../utils/helpers";
 
 function StallDetails() {
+  // console.log(state.stall.username)
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
 
@@ -61,7 +64,8 @@ function StallDetails() {
       {stall ? (
         <div>
           <Link to="/">← Back to Products</Link>
-
+          {/* {userParam===Auth.getProfile().data._id} */}
+          <ProductForm/>
           <h2>{stall.name}</h2>
           <Container>
             <Row>

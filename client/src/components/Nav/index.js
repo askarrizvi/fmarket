@@ -8,29 +8,25 @@ function Nav() {
       return (
         <ul className="flex-row">
           <li className="mx-1">
-            <Link to="/orderHistory">
-              Order History
-            </Link>
+                <Link to="/MyStall/">
+                  New Stall
+                </Link>
+          <li className="mx-1">
+                <Link to={`/home`}>
+                  View All Stall
+                </Link>
+          </li>
           </li>
           <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <a href="/" onClick={() => Auth.logout()}>
-              Logout
-            </a>
+                <Link to="/orderHistory">
+                  Order History
+                </Link>
           </li>
           <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            {/* <Link to={`/MyStall/${me.data._id}`}>
-              My Stall
-            </Link> */}
-             
-          </li>
-          <li className="mx-1">
-            {/* this is not using the Link component to logout or user and then refresh the application to the start */}
-            <Link to="/home/">
-              View All Stalls
-            </Link>
-             
+                {/* this is not using the Link component to logout or user and then refresh the application to the start */}
+                <a href="/" onClick={() => Auth.logout()}>
+                  Logout
+                </a>
           </li>
         </ul>
       );
@@ -38,14 +34,14 @@ function Nav() {
       return (
         <ul className="flex-row">
           <li className="mx-1">
-            <Link to="/signup">
-              Signup
-            </Link>
+                <Link to="/signup">
+                  Signup
+                </Link>
           </li>
           <li className="mx-1">
-            <Link to="/login">
-              Login
-            </Link>
+                <Link to="/login">
+                  Login
+                </Link>
           </li>
         </ul>
       );

@@ -13,8 +13,6 @@ import Home from './pages/Home';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Splash from './pages/Splash';
-import Test from './pages/Test';
 import Nav from './components/Nav';
 import StallDetails from './pages/StallDetails'
 import { StoreProvider } from "./utils/GlobalState";
@@ -48,12 +46,9 @@ function App() {
       <Router>
         <div>
           <StoreProvider>
-            <Switch>
-              <Route exact path="/" component={Splash} />
-              <div>
                 <Nav />
                 <Switch>
-                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/" component={Login} />
                   <Route exact path="/signup" component={Signup} />
                   <Route exact path="/home" component={Home} />
                   <Route exact path="/orderHistory" component={OrderHistory} />
@@ -63,8 +58,6 @@ function App() {
                   <Route exact path="/addstall" component={AddStall} />
                   <Route component={NoMatch} />
                 </Switch>
-              </div>
-            </Switch>
           </StoreProvider>
         </div>
       </Router>

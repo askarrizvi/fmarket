@@ -41,7 +41,7 @@ function Signup(props) {
         <Col xs={12} lg={4}></Col>
         <Col xs={12} lg={4}><img src='/images/fmarketlogoblack.jpg' alt='f market logo' style={{ marginTop: '5rem', width: '15rem' }}></img></Col>
         <Col xs={12} lg={4}>
-            <Link to="/login">← Go to Login</Link>
+            <Link to="/">← Go to Login</Link>
 
             <Card className='mt-5 mx-auto shadow p-3 mb-5 bg-white rounded' style={{ width: '80%' }}>
               <Card.Body>
@@ -109,6 +109,7 @@ function Signup(props) {
                 </Form>
                 </Card.Text>
               </Card.Body>
+              <Link to='/home' style={{ textDecoration: 'none' }}>Continue as guest</Link>
             </Card>
         </Col>
       </Row>

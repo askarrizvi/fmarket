@@ -82,53 +82,54 @@ const resolvers = {
       //console.log(args);
 
       for (let i = 0; i < args.products.length; i++) {
-        //console.log("i"+i+":")
         const prodStallId = args.products[i];
         const stallparent = await Stall.findOne({ 'products._id': prodStallId });
         const stallpop = await stallparent.populate('details').execPopulate();
 
-        for (let j = 0; j < stallpop.products.length; j++) {
-          let compare = stallpop.products[j]._id;
-          /* DEBUGGING FOR FOR LOOP
-          console.log("j"+j + ":");
-          console.log("args ID: "+prodStallId)*/
-          //console.log("stal ID: "+compare)
-          if (compare == prodStallId) {
-            const prodId = stallpop.products[j].details;
-            const productget = await Product.findById(prodId);
-            /* DEBUGGING FOR STRIPE PRODUCTS
-            console.log("--Stripe Products Input--");
-            console.log("name: "+ productget.name);
-            console.log("description: "+ productget.description);
-            console.log("image: "+ `${url}/images/${productget.image}`);*/
-            const product = await stripe.products.create({
-              name: productget.name,
-              description: productget.description,
-              images: [`${url}/images/${productget.image}`]
-            });
+        var result = stallpop.products.filter(obj => {
+          return obj._id == prodStallId
+        })
 
-            // generate price id using the product id
+        const prodId = result[0].details;
+        const productget = await Product.findById(prodId);
+        /* DEBUGGING FOR FOR LOOP
+        console.log("j"+j + ":");
+        console.log("args ID: "+prodStallId)*/
+        //console.log("stal ID: "+compare)
+        //const prodId = stallpop.products[j].details;
+        //const productget = await Product.findById(prodId);
+        /* DEBUGGING FOR STRIPE PRODUCTS
+        console.log("--Stripe Products Input--");
+        console.log("name: "+ productget.name);
+        console.log("description: "+ productget.description);
+        console.log("image: "+ `${url}/images/${productget.image}`);*/
+        const product = await stripe.products.create({
+          name: productget.name,
+          description: productget.description,
+          images: [`${url}/images/${productget.image}`]
+        });
 
-            /* DEBUGGING FOR STRIPE PRICES
-            console.log("--Stripe Prices Input--");
-            console.log("product: "+ product.id);
-            console.log("unit_amount: "+ stallpop.products[j].price*100);*/
-            const price = await stripe.prices.create({
-              product: product.id,
-              unit_amount: stallpop.products[j].price * 100,
-              currency: 'usd',
-            });
+        // generate price id using the product id
 
-            // add price id to the line items array
-            /* DEBUGGING FOR LINE ITEMS
-            console.log("--Stripe line_items Input--");
-            console.log("price: "+ price.id);*/
-            line_items.push({
-              price: price.id,
-              quantity: 1
-            });
-          }
-        }
+        /* DEBUGGING FOR STRIPE PRICES
+        console.log("--Stripe Prices Input--");
+        console.log("product: "+ product.id);
+        console.log("unit_amount: "+ stallpop.products[j].price*100);*/
+        const price = await stripe.prices.create({
+          product: product.id,
+          unit_amount: result[0].price * 100,
+          currency: 'usd',
+        });
+
+        // add price id to the line items array
+        /* DEBUGGING FOR LINE ITEMS
+        console.log("--Stripe line_items Input--");
+        console.log("price: "+ price.id);*/
+        line_items.push({
+          price: price.id,
+          quantity: 1
+        });
+
       }
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -176,11 +177,11 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
-    addLike: async(parent, {_id}) => {
-      return await Stall.findOneAndUpdate(_id, {$inc: {'upvotes' : 1}})
+    addLike: async (parent, { _id }) => {
+      return await Stall.findOneAndUpdate(_id, { $inc: { 'upvotes': 1 } })
     },
-    removeLike: async(parent, {_id}) => {
-      return await Stall.findOneAndUpdate(_id, {$inc: {'upvotes' : -1}})
+    removeLike: async (parent, { _id }) => {
+      return await Stall.findOneAndUpdate(_id, { $inc: { 'upvotes': -1 } })
     },
     updateUser: async (parent, args, context) => {
       if (context.user) {

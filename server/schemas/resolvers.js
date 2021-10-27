@@ -149,9 +149,9 @@ const resolvers = {
 
       return { token, user };
     },
-    addStall: async (parent, { name }, context) => {
+    addStall: async (parent, { name, description }, context) => {
       if (context.user) {
-        const stall = await Stall.create({ name });
+        const stall = await Stall.create({ name, description });
         console.log(context.user._id);
 
         await User.findByIdAndUpdate(context.user._id, { stall: stall }, { new: true }, function (err, result) {

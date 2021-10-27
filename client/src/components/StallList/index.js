@@ -8,7 +8,7 @@ import StallItem from '../StallItem';
 import { QUERY_USERS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_STALLS } from '../../utils/actions';
+import { UPDATE_STALLS, UPDATE_CURRENT_STALL } from '../../utils/actions';
 import { idbPromise } from '../../utils/helpers';
 // import { UPDATE_PRODUCTS } from '../../utils/actions';
 // import { idbPromise } from "../../utils/helpers";
@@ -44,6 +44,15 @@ function StallList() {
       })
     }
   }, [data, loading, dispatch])
+
+  useEffect(()=> {
+    if (data) {
+    dispatch({
+      type: UPDATE_CURRENT_STALL,
+      currentStall: ""
+    });
+  }
+  },[data, dispatch]);
 
   return (
     <div className="my-2">

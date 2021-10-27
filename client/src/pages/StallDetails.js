@@ -10,7 +10,8 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
-  UPDATE_STALLS
+  UPDATE_STALLS,
+  UPDATE_CURRENT_STALL
 } from '../utils/actions';
 import Cart from '../components/Cart';
 import { idbPromise } from "../utils/helpers";
@@ -20,7 +21,6 @@ function StallDetails() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
   const { data } = useQuery(QUERY_STALLS);
-  //console.log(state);
 
   useEffect(() => {
     if (data) {
@@ -31,11 +31,20 @@ function StallDetails() {
     }
   }, [data, dispatch]);
 
+  useEffect(()=> {
+    if (data) {
+    dispatch({
+      type: UPDATE_CURRENT_STALL,
+      currentStall: id
+    });
+  }
+  },[data, dispatch]);
+
   const stall = state.stalls.find(stall => stall._id === id)
 
   const { cart } = state;
 
-  const addToCart = (e, product) => {
+  const addToCart = (product) => {
     //console.log(product)
     const itemInCart = cart.find((cartItem) => cartItem._id === product._id)
 

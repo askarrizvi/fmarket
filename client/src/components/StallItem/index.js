@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 // import { useMutation } from '@apollo/client'
 
 import { useStoreContext } from '../../utils/GlobalState';
-import { UPDATE_CURRENT_STALL }  from '../../utils/actions';
 // import { ADD_LIKE, REMOVE_LIKE } from '../../utils/mutations'
 
 import { Card, Col, Row } from 'react-bootstrap'
@@ -22,13 +21,6 @@ function StallItem(stall) {
   // const [addLikeMutation] = useMutation(ADD_LIKE)
   // const [removeLikeMutation] = useMutation(REMOVE_LIKE)
 
-  const handleClick = id => {
-    dispatch({
-      type: UPDATE_CURRENT_STALL,
-      currentStall: id
-    });
-  };
-
   // const addLike = () => {
   //   addLikeMutation({
   //     variables: { _id: _id }
@@ -44,13 +36,10 @@ function StallItem(stall) {
   return (
     <>
       <Card className='mt-5 mx-auto shadow-lg p-3 mb-5 bg-white rounded' style={{ width: '75%' }}>
-        <Link to={`/stall/${_id}`} style={{ color: 'black', textDecoration: 'none' }}>
+        <Link to={`/stall/${_id}`} style={{ color: 'black', textDecoration: 'none' }} >
           <Card.Img variant="top" src={`/images/${image}`} alt={name} />
 
-          <p
-            onClick={() => {
-              handleClick(_id)
-            }}>{name}</p>
+          <p>{name}</p>
 
           <p style={{ fontWeight: 'normal' }}>{description}</p>
         </Link>

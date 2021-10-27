@@ -9,14 +9,12 @@ import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { loadStripe } from '@stripe/stripe-js';
-import spinner from '../../assets/spinner.gif';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Cart = () => {
     const [state, dispatch] = useStoreContext();
     const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);
-    //console.log(state);
 
     useEffect(() => {
         async function getCart() {
@@ -31,7 +29,6 @@ const Cart = () => {
 
     useEffect(() => {
         if (data) {
-            console.log("here");
             stripePromise.then((res) => {
                 res.redirectToCheckout({ sessionId: data.checkout.session });
             });
@@ -64,14 +61,7 @@ const Cart = () => {
         });
         getCheckout({
             variables: { products: productIds }
-        });;
-    }
-
-    function showSpinner() {
-        return (<div>
-            <img src={spinner} alt="loading" />
-        </div>);
-        //return (<img src={spinner} alt="loading" />)
+        });
     }
 
     if (!state.cartOpen) {
@@ -102,13 +92,9 @@ const Cart = () => {
                         <strong>Total: ${calculateTotal()}</strong>
                         {
                             Auth.loggedIn() ?
-                                <><button onClick={function () {
-                                    submitCheckout();
-                                } }>
+                                <button onClick={submitCheckout}>
                                     Checkout
-                                </button><div>
-                                        <img src={spinner} alt="loading" />
-                                    </div></>
+                                </button>
                                 :
                                 <span>(log in to check out)</span>
                         }

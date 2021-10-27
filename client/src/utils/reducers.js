@@ -21,8 +21,8 @@ export const reducer = (state, action) => {
         // if action type value is the value of `UPDATE_PRODUCTS`, return a new state object with an updated products array
         case UPDATE_STALLS:
             return { ...state, stalls: [...action.stalls] };
-            case UPDATE_CURRENT_STALL:
-                return { ...state, currentStall: action.currentStall };
+        case UPDATE_CURRENT_STALL:
+            return { ...state, currentStall: action.currentStall };
         // if action type value is the value of `UPDATE_CATEGORIES`, return a new state object with an updated categories array
         case UPDATE_CATEGORIES:
             return { ...state, categories: [...action.categories] };

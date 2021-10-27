@@ -67,3 +67,14 @@ export const REMOVE_LIKE = gql`
     }
   }
 `
+
+export const ADD_STALL = gql`
+mutation addStall($name: String!, $description: String!) {
+  addStall(name: $name, description: $description){
+    _id
+    name
+    description
+    upvotes
+}
+}
+`

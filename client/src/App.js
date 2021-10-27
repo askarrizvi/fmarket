@@ -19,8 +19,9 @@ import Nav from './components/Nav';
 import StallDetails from './pages/StallDetails'
 import { StoreProvider } from "./utils/GlobalState";
 import OrderHistory from './pages/OrderHistory';
-import Success from './pages/Success'
+import Success from './pages/Success';
 import MyStall from './pages/MyStall';
+import AddStall from './pages/AddStall'; 
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -60,6 +61,7 @@ function App() {
                   <Route exact path="/stall/:id" component={StallDetails} />
                   <Route exact path="/success" component={Success} />
                   <Route exact path="/mystall" component={MyStall} />
+                  <Route exact path="/addstall" component={AddStall} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>

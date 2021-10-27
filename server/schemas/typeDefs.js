@@ -72,7 +72,7 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, username: String!, password: String!): Auth
-    addStall(name: String!): Stall
+    addStall(name: String!, description: String!): Stall
     addOrder(products: [ID]!): Order
     addLike(_id: ID!): Stall
     removeLike(_id: ID!): Stall

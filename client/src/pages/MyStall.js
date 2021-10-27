@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
+import { Link } from 'react-router-dom';
 
 import { Container, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -44,7 +45,7 @@ const MyStall = () => {
                                 </Row>
                             </Container>
                         </div>
-                    ) : <span>Click here to create a new stall</span>}
+                    ) : <Link to="/addstall">Click here to create a new stall</Link>}
                 </>
             ) : <span>Please Login</span>}
             {loading ? <img src={spinner} alt="loading" /> : null}

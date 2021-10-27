@@ -15,7 +15,8 @@ const stallSchema = new Schema({
         default: 0
     },
     image: {
-        type: String
+        type: String,
+        default: 'pams-stall.jpg'
     },
     description: {
         type: String,

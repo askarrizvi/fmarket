@@ -46,18 +46,22 @@ function App() {
       <Router>
         <div>
           <StoreProvider>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <div>
                 <Nav />
                 <Switch>
-                  <Route exact path="/" component={Login} />
-                  <Route exact path="/signup" component={Signup} />
                   <Route exact path="/home" component={Home} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/signup" component={Signup} />
                   <Route exact path="/orderHistory" component={OrderHistory} />
                   <Route exact path="/stall/:id" component={StallDetails} />
                   <Route exact path="/success" component={Success} />
                   <Route exact path="/mystall" component={MyStall} />
-                  <Route exact path="/addstall" component={AddStall} />
                   <Route component={NoMatch} />
                 </Switch>
+              </div>
+            </Switch>
           </StoreProvider>
         </div>
       </Router>

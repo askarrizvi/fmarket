@@ -9,6 +9,7 @@ import { TOGGLE_CART, ADD_MULTIPLE_TO_CART } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
 import { QUERY_CHECKOUT } from '../../utils/queries';
 import { loadStripe } from '@stripe/stripe-js';
+import spinner from '../../assets/spinner.gif';
 
 const stripePromise = loadStripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
@@ -63,7 +64,14 @@ const Cart = () => {
         });
         getCheckout({
             variables: { products: productIds }
-        });
+        });;
+    }
+
+    function showSpinner() {
+        return (<div>
+            <img src={spinner} alt="loading" />
+        </div>);
+        //return (<img src={spinner} alt="loading" />)
     }
 
     if (!state.cartOpen) {
@@ -94,9 +102,13 @@ const Cart = () => {
                         <strong>Total: ${calculateTotal()}</strong>
                         {
                             Auth.loggedIn() ?
-                                <button onClick={submitCheckout}>
+                                <><button onClick={function () {
+                                    submitCheckout();
+                                } }>
                                     Checkout
-                                </button>
+                                </button><div>
+                                        <img src={spinner} alt="loading" />
+                                    </div></>
                                 :
                                 <span>(log in to check out)</span>
                         }

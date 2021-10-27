@@ -35,7 +35,7 @@ function StallDetails() {
 
   const { cart } = state;
 
-  const addToCart = (product) => {
+  const addToCart = (e, product) => {
     //console.log(product)
     const itemInCart = cart.find((cartItem) => cartItem._id === product._id)
 
@@ -88,7 +88,7 @@ function StallDetails() {
                       <Card.Text> {product.details.description} </Card.Text>
                       <Card.Text> Quantity: {product.quantity} </Card.Text>
                       <Card.Text> Price: {product.price} </Card.Text>
-                      <Button variant="primary" onClick={() => { addToCart({...product, stallId: stall._id}) }}>Add to cart</Button>
+                      <Button variant="primary" onClick={() => {addToCart({ ...product, stallId: stall._id }) }}>Add to cart</Button>
                       <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
                     </Card.Body>
                   </Card>

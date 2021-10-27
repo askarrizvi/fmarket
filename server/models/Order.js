@@ -11,9 +11,16 @@ const orderSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: 'StallProduct'
-    }
+    } 
   ]
 });
+
+/*
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Stall.products'
+    } 
+    */
 
 const Order = mongoose.model('Order', orderSchema);
 

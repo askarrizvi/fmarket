@@ -59,8 +59,9 @@ const typeDefs = gql`
     user: User
     getUsers: [User]
     getUserbyId(_id: ID!): User
-    stall(userid: ID!): Stall
+    stall(userid: ID!): User
     getStallbyId(_id: ID!): Stall
+    getStallbyProdId(prodId: ID): Stall
     getAllStalls: [Stall]
     stallProduct(_id: ID!): StallProduct
     order(_id: ID!): Order

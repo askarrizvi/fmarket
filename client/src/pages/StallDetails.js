@@ -19,7 +19,7 @@ import { QUERY_STALLS } from '../utils/queries';
 function StallDetails() {
   const [state, dispatch] = useStoreContext();
   const { id } = useParams();
-  const { loading, data } = useQuery(QUERY_STALLS);
+  const { data } = useQuery(QUERY_STALLS);
   //console.log(state);
 
   useEffect(() => {
@@ -79,18 +79,18 @@ function StallDetails() {
           <Container>
             <Row>
               {stall.products.map(product => (
-                <Col xs={12} lg={4} className='text-center'>
-                  <Card style={{ width: '22rem' }}>
-                    <Card.Img variant="top" src={`/images/${product.details.image}`} alt={product.details.name} />
-                    <Card.Body>
-                      <Card.Title>{product.details.name}</Card.Title>
-                      <Card.Text> {product.details.description} </Card.Text>
-                      <Card.Text> Quantity: {product.quantity} </Card.Text>
-                      <Card.Text> Price: {product.price} </Card.Text>
-                      <Button className='m-2' variant="primary" onClick={() => { addToCart({...product, stallId: stall._id}) }}>Add to cart</Button>
-                      <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
-                    </Card.Body>
-                  </Card>
+                <Col xs={12} lg={6} xl={4}>
+                    <Card className='mx-auto shadow-lg p-3 mb-5 bg-white rounded' style={{ width: '22rem' }}>
+                      <Card.Img variant="top" src={`/images/${product.details.image}`} alt={product.details.name} />
+                      <Card.Body>
+                        <Card.Title>{product.details.name}</Card.Title>
+                        <Card.Text> {product.details.description} </Card.Text>
+                        <Card.Text> Quantity: {product.quantity} </Card.Text>
+                        <Card.Text> Price: {product.price} </Card.Text>
+                        <Button className='m-2' variant="primary" onClick={() => { addToCart({ ...product, stallId: stall._id }) }}>Add to cart</Button>
+                        <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
+                      </Card.Body>
+                    </Card>
                 </Col>
               ))}
             </Row>

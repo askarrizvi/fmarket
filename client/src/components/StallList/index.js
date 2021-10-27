@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 
+import { Container, Row, Col } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import StallItem from '../StallItem';
 import { QUERY_USERS } from '../../utils/queries';
 import spinner from '../../assets/spinner.gif';
@@ -10,7 +13,7 @@ import { idbPromise } from '../../utils/helpers';
 // import { UPDATE_PRODUCTS } from '../../utils/actions';
 // import { idbPromise } from "../../utils/helpers";
 
-function ProductList() {
+function StallList() {
   const [state, dispatch] = useStoreContext();
 
   const { loading, data } = useQuery(QUERY_USERS);
@@ -20,11 +23,16 @@ function ProductList() {
       dispatch({
         type: UPDATE_STALLS,
         stalls: data.getUsers.map((user) => {
-          return user.stall
+          if (user.stall) {
+            return user.stall
+          } 
         })
+        || []
       })
       data.getUsers.forEach((user) => {
-        idbPromise('stalls', 'put', user.stall)
+        if (user.stall) {
+          idbPromise('stalls', 'put', user.stall)
+        }
       });
 
     } else if (!loading) {
@@ -35,22 +43,33 @@ function ProductList() {
         })
       })
     }
-  }, [data, loading])
+  }, [data, loading, dispatch])
 
   return (
     <div className="my-2">
       <h2>Farmer's Market Stalls:</h2>
       {state.stalls.length ? (
         <div className="flex-row">
-          {state.stalls.map(stall => (
-            <StallItem
-              key={stall._id}
-              _id={stall._id}
-              name={stall.name}
-              products={stall.products}
-              upvotes={stall.upvotes}
-            />
-          ))}
+          <Container>
+            <Row>
+              {state.stalls.map(stall => (
+                stall ? (
+                <Col xs={12}>
+                  <StallItem
+                    key={stall._id}
+                    _id={stall._id}
+                    name={stall.name}
+                    description={stall.description}
+                    image={stall.image}
+                    products={stall.products}
+                    upvotes={stall.upvotes}
+                  />
+                </Col>
+                )
+                : <></>
+              ))}
+            </Row>
+          </Container>
         </div>
       ) : (
         <h3>There aren't any stalls yet!</h3>
@@ -60,4 +79,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default StallList;

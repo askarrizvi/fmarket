@@ -131,7 +131,9 @@ db.once('open', async () => {
       products: [
         {details: products[0]._id, price: 3.99, quantity: 200}, 
         {details: products[1]._id, price: 2.99, quantity: 400}, 
-        {details: products[2]._id, price: 5.99, quantity: 150}]
+        {details: products[2]._id, price: 5.99, quantity: 150}],
+      image: 'pams-stall.jpg',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ornare diam quis eleifend rutrum. Aliquam nulla est, volutpat non enim nec, pharetra gravida augue. Donec vitae dictum neque. Pellentesque arcu lorem, fringilla non ligula ac, tristique bibendum erat. Ut a semper nibh. Quisque a mi et mi tempor ultricies. Maecenas eu ipsum eu enim hendrerit accumsan at euismod urna.'
     },
     {
       name: "Elijah's Stall",
@@ -140,7 +142,9 @@ db.once('open', async () => {
         {details: products[0]._id, price: 4.99, quantity: 100}, 
         {details: products[3]._id, price: 6.99, quantity: 325}, 
         {details: products[7]._id, price: 2.99, quantity: 250},
-        {details: products[8]._id, price: 7.99, quantity: 50}]
+        {details: products[8]._id, price: 7.99, quantity: 50}],
+      image: 'elijahs-stall.jpg',
+      description: 'In sodales, ipsum quis ultricies porttitor, tellus urna aliquam arcu, eget venenatis purus ligula ut nisi. Fusce ut felis dolor. Mauris justo ante, aliquet non tempus in, tempus ac lorem. Aliquam lacinia dolor eu sem eleifend ultrices. Etiam mattis metus metus. Sed ligula dui, placerat non turpis vitae, suscipit volutpat elit. Phasellus sagittis, diam elementum suscipit fringilla, libero mauris scelerisque ex, ac interdum diam erat non sapien.'
     }
   ])
 

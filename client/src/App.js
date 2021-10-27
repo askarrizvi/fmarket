@@ -58,6 +58,7 @@ function App() {
                   <Route exact path="/stall/:id" component={StallDetails} />
                   <Route exact path="/success" component={Success} />
                   <Route exact path="/mystall" component={MyStall} />
+                  <Route exact path="/addstall" component={AddStall} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>

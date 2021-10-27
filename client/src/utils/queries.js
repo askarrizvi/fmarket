@@ -108,18 +108,23 @@ export const QUERY_CATEGORIES = gql`
 export const QUERY_USER = gql`
   {
     user {
-      firstName
-      lastName
-      orders {
+      username
+      stall {
         _id
-        purchaseDate
+        name
+        description
+        image
+        upvotes
         products {
           _id
-          name
-          description
+          details {
+            _id
+            name
+            description
+            image
+          }
           price
           quantity
-          image
         }
       }
     }

@@ -56,7 +56,7 @@ function StallList() {
 
   return (
     <div className="my-2">
-      <h2 style={{ textDecoration: 'underline' }} className="text-center">Recommended Stalls</h2>
+      <h2 style={{ fontWeight: 'bold' }} className='m-5 text-center'>Recommended Stalls</h2>
       {state.stalls.length ? (
         <div className="flex-row">
           <Container>

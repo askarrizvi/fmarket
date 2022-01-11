@@ -84,7 +84,7 @@ function StallDetails() {
       {stall ? (
         <div>
           <Link className='m-3' to="/home">← View All Stalls</Link>
-          <h2 style={{ textDecoration: 'underline' }} className='m-5 text-center'>{stall.name}</h2>
+          <h2 style={{ fontWeight: 'bold' }} className='m-5 text-center'>{stall.name}</h2>
           <Container>
             <Row>
               {stall.products.map(product => (
@@ -95,7 +95,7 @@ function StallDetails() {
                         <Card.Title>{product.details.name}</Card.Title>
                         <Card.Text> {product.details.description} </Card.Text>
                         <Card.Text> Quantity: {product.quantity} </Card.Text>
-                        <Card.Text> Price: {product.price} </Card.Text>
+                        <Card.Text> Price: ${product.price} </Card.Text>
                         <Button className='m-2' variant="primary" onClick={() => { addToCart({ ...product, stallId: stall._id }) }}>Add to cart</Button>
                         <Button variant="primary" disabled={!state.cart.find(p => p._id === product._id)} onClick={() => { removeFromCart(product) }}>Delete from cart</Button>
                       </Card.Body>

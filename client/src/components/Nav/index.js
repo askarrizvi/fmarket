@@ -12,14 +12,14 @@ function Nav() {
       return (
 
         <ul style={{ listStyleType: 'none' }} className="flex-row">
-          <Col xs={12} md={6} className='mt-2'>
+          <Col xs={12} md={6} className='mt-4'>
             <li className="mx-auto">
               <Link style={{ textDecoration: 'none' }} to="/mystall">
                 My Stall
               </Link>
             </li>
           </Col>
-          <Col xs={12} md={6} className='mt-2'>
+          <Col xs={12} md={6} className='mt-4'>
             <li className="mx-auto">
               {/* this is not using the Link component to logout or user and then refresh the application to the start */}
               <a style={{ textDecoration: 'none' }} href="/" onClick={() => Auth.logout()}>
@@ -55,7 +55,7 @@ function Nav() {
             <Link to="/home">
               <img
                 src={`/images/fmarketlogowhitetran.png`}
-                alt='Cart Icon'
+                alt='FMarket Icon'
               />
             </Link>
           </h1>

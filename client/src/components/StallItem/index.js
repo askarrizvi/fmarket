@@ -18,11 +18,11 @@ function StallItem(stall) {
 
   return (
     <>
-      <Card className='mt-5 mx-auto shadow-lg p-3 mb-5 bg-white rounded' style={{ width: '75%' }}>
+      <Card className='mt-10 mx-auto shadow-lg p-3 mb-5 bg-white rounded' style={{ width: '75%' }}>
         <Link to={`/stall/${_id}`} style={{ color: 'black', textDecoration: 'none' }} >
           <Card.Img variant="top" src={`/images/${image}`} alt={name} />
 
-          <p style={{ textDecoration: 'underline' }}>{name}</p>
+          <p className='mt-4' style={{ textDecoration: 'underline' }}>{name}</p>
 
           <p style={{ fontWeight: 'normal' }}>{description}</p>
         </Link>

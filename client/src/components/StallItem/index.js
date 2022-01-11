@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { useMutation } from '@apollo/client'
 
 import { useStoreContext } from '../../utils/GlobalState';
-// import { ADD_LIKE, REMOVE_LIKE } from '../../utils/mutations'
 
 import { Card, Col, Row } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,21 +15,6 @@ function StallItem(stall) {
     upvotes,
   } = stall;
   const [dispatch] = useStoreContext();
-
-  // const [addLikeMutation] = useMutation(ADD_LIKE)
-  // const [removeLikeMutation] = useMutation(REMOVE_LIKE)
-
-  // const addLike = () => {
-  //   addLikeMutation({
-  //     variables: { _id: _id }
-  //   })
-  // }
-
-  // const removeLike = () => {
-  //   removeLikeMutation({
-  //     variables: { _id: _id }
-  //   })
-  // }
 
   return (
     <>
